@@ -2,7 +2,11 @@
 
 namespace Intcode_computer {
 	public class Computer {
-		public static void compute(int[] program) {
+		int[] program;
+		public Computer(int[] intcode_program) {
+			program = intcode_program;
+		}
+		public void compute() {
 
 			bool abort = false;
 			int pc = 0;
@@ -102,16 +106,16 @@ namespace Intcode_computer {
 			Console.ReadLine();
 		}
 
-		public static void writeOutput(int v) {
+		public void writeOutput(int v) {
 			Console.WriteLine(v);
 		}
 
-		public static int readInput() {
+		public int readInput() {
 			Console.WriteLine("Program needs input:");
 			return int.Parse(Console.ReadLine());
 		}
 
-		private static void getParameters(int[] program, int pc, int[] mode, out int par1, out int par2, out int par3) {
+		private void getParameters(int[] program, int pc, int[] mode, out int par1, out int par2, out int par3) {
 			int t = 0;
 			getParameters(program, pc, mode, out par1, out par2);
 			if (mode[0] == 0) {
@@ -123,7 +127,7 @@ namespace Intcode_computer {
 			}
 		}
 
-		private static void getParameters(int[] program, int pc, int[] mode, out int par1, out int par2) {
+		private void getParameters(int[] program, int pc, int[] mode, out int par1, out int par2) {
 			int t = 0;
 			getParameters(program, pc, mode, out par1);
 			if (mode[1] == 0) {
@@ -135,7 +139,7 @@ namespace Intcode_computer {
 			}
 		}
 
-		private static void getParameters(int[] program, int pc, int[] mode, out int par1) {
+		private void getParameters(int[] program, int pc, int[] mode, out int par1) {
 			int t = 0;
 			if (mode[2] == 0) {
 				t = program[pc + 1];
